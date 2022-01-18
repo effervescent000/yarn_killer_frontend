@@ -1,12 +1,15 @@
 import React from "react";
 
+import BrowseItem from "./browse-item";
+
 const BrowseResultsContainer = (props) => {
-    return (
-        <div>
-            {/* stuff */}
-            {/* blah */}
-        </div>
-    );
+    const populateResults = () => {
+        return props.yarnResults.map((yarn) => {
+            return <BrowseItem yarn={yarn} />;
+        });
+    };
+
+    return <div id="results-container">{populateResults()}</div>;
 };
 
 export default BrowseResultsContainer;

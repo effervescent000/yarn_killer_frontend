@@ -1,0 +1,20 @@
+#browse-content-wrapper {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+
+    #results-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        justify-items: center;
+        gap: 10px;
+        border: 2px solid $primary-accent-color;
+        padding: 20px;
+        align-items: center;
+
+        .yarn-item {
+            border: 1px solid $secondary-accent-color;
+            padding: 12px;
+            text-align: center;
+        }
+    }
+}

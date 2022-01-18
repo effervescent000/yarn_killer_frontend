@@ -19,7 +19,7 @@ const BrowseYarnPage = (props) => {
     });
 
     return (
-        <div className="content-wrapper">
+        <div id="browse-content-wrapper">
             <BrowseResultsContainer yarnResults={yarnResults} />
             <BrowseFilterWrapper setYarnResults={setYarnResults} />
         </div>

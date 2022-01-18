@@ -12,15 +12,16 @@ const App = () => {
         <Router>
             <div className="App">
                 <Header />
-
-                <Switch>
-                    <Route exact path="/">
-                        <HomePage />
-                    </Route>
-                    <Route path="/yarn/browse">
-                        <BrowsePage />
-                    </Route>
-                </Switch>
+                <div className="content-wrapper">
+                    <Switch>
+                        <Route exact path="/">
+                            <HomePage />
+                        </Route>
+                        <Route path="/yarn/browse">
+                            <BrowsePage />
+                        </Route>
+                    </Switch>
+                </div>
             </div>
         </Router>
     );
