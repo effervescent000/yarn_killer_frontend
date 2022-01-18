@@ -17,14 +17,14 @@ const YarnStats = (props) => {
                 <div className="label">Known colors</div>
             </div>
             <div id="stats-output">
-                <div className="output">{yarn.weight}</div>
-                <div className="output">{yarn.gauge}</div>
-                <div className="output">{yarn.yardage}</div>
-                <div className="output">{yarn.unit_weight}</div>
+                <div className="output">{yarn.weight_name}</div>
+                <div className="output">{yarn.gauge} sts = 4"</div>
+                <div className="output">{yarn.yardage}yds</div>
+                <div className="output">{yarn.weight_grams}g</div>
                 <div className="output">{yarn.texture}</div>
-                <div className="output">Color style</div>
-                <div className="output">Fibers</div>
-                <div className="output">Known colors</div>
+                <div className="output">{yarn.color_style}</div>
+                <div className="output">{yarn.fibers}</div>
+                <div className="output">{}</div>
             </div>
         </div>
     );
