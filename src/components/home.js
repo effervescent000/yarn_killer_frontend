@@ -3,7 +3,7 @@ import React from "react";
 const HomePage = (props) => {
     return (
         <div className="content-wrapper">
-            {/* stuff here */}
+            Nothing here yet
             {/* stuff here */}
         </div>
     );
