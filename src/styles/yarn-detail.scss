@@ -6,8 +6,10 @@
         grid-template-columns: 1fr 1fr;
         #left-side-grid {
             #stats-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
+                .attribute {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                }
             }
         }
     }

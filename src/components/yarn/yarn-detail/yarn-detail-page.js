@@ -7,7 +7,6 @@ import YarnStats from "./yarn-stats";
 const YarnDetailPage = (props) => {
     const [yarn, setYarn] = useState({});
     const { permalink } = useParams();
-    console.log(props);
 
     useEffect(() => {
         if (Object.keys(yarn).length === 0) {
