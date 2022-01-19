@@ -33,7 +33,7 @@ const YarnEditPage = (props) => {
 
     return (
         <div id="yarn-create-wrapper">
-            <YarnForm setForm={setFormData} />
+            <YarnForm setFormData={setFormData} />
         </div>
     );
 };
