@@ -5,7 +5,7 @@ import BrowseItem from "./browse-item";
 const BrowseResultsContainer = (props) => {
     const populateResults = () => {
         return props.yarnResults.map((yarn) => {
-            return <BrowseItem yarn={yarn} />;
+            return <BrowseItem key={yarn.id} yarn={yarn} />;
         });
     };
 

@@ -9,19 +9,23 @@ const BrowseYarnPage = (props) => {
 
     useEffect(() => {
         if (yarnResults.length === 0) {
-            axios
-                .get(`${process.env.REACT_APP_DOMAIN}/yarn/get`)
-                .then((response) => {
-                    setYarnResults(response.data);
-                })
-                .catch((error) => console.log(error.response));
+            getAllYarn();
         }
     });
+
+    const getAllYarn = () => {
+        axios
+            .get(`${process.env.REACT_APP_DOMAIN}/yarn/get`)
+            .then((response) => {
+                setYarnResults(response.data);
+            })
+            .catch((error) => console.log(error.response));
+    };
 
     return (
         <div id="browse-content-wrapper">
             <BrowseResultsContainer yarnResults={yarnResults} />
-            <BrowseFilterWrapper setYarnResults={setYarnResults} />
+            <BrowseFilterWrapper getAllYarn={getAllYarn} setYarnResults={setYarnResults} />
         </div>
     );
 };

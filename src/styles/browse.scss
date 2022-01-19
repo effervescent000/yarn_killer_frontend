@@ -1,6 +1,7 @@
 #browse-content-wrapper {
     display: grid;
     grid-template-columns: 4fr 1fr;
+    gap: 20px;
 
     #results-container {
         display: grid;
@@ -15,6 +16,10 @@
             border: 1px solid $secondary-accent-color;
             padding: 12px;
             text-align: center;
+        }
+    }
+    #filter-form-wrapper {
+        .inputs {
         }
     }
 }
