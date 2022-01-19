@@ -11,7 +11,7 @@ const BrowseYarnPage = (props) => {
         if (yarnResults.length === 0) {
             getAllYarn();
         }
-    });
+    }, []);
 
     const getAllYarn = () => {
         axios

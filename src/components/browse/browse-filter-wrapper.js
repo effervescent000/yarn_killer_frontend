@@ -7,6 +7,9 @@ const BrowseFilterWrapper = (props) => {
     const [yarnName, setYarnName] = useState("");
     const [gaugeInput, setGaugeInput] = useState("");
     const [approxInput, setApproxInput] = useState(false);
+    const [weightName, setWeightName] = useState("");
+    const [textureInput, setTextureInput] = useState("");
+    const [colorStyleInput, setColorStyleInput] = useState("");
 
     useEffect(() => {
         getBrands();
@@ -40,18 +43,40 @@ const BrowseFilterWrapper = (props) => {
             setGaugeInput(event.target.value);
         } else if (event.target.name === "approx-input") {
             setApproxInput(approxInput ? false : true);
+        } else if (event.target.name === "yarn-weight-select") {
+            setWeightName(event.target.value);
+        } else if (event.target.name === "texture-select") {
+            setTextureInput(event.target.value);
+        } else if (event.target.name === "color-style-select") {
+            setColorStyleInput(event.target.value);
         }
     };
 
     const handleClick = (event) => {
         if (event.target.name === "submit-btn") {
+            let params = {};
+            if (selectedBrand) {
+                params.brand = selectedBrand;
+            }
+            if (yarnName) {
+                params.name = yarnName;
+            }
+            if (gaugeInput) {
+                params.gauge = gaugeInput;
+                params.approx = approxInput;
+            }
+            if (weightName) {
+                params.weightName = weightName;
+            }
+            if (textureInput) {
+                params.texture = textureInput;
+            }
+            if (colorStyleInput) {
+                params.colorStyle = colorStyleInput;
+            }
+
             axios
-                .get(`${process.env.REACT_APP_DOMAIN}/yarn/get`, {
-                    params: {
-                        brand: selectedBrand,
-                        name: yarnName,
-                    },
-                })
+                .get(`${process.env.REACT_APP_DOMAIN}/yarn/get`, { params })
                 .then((response) => {
                     props.setYarnResults(response.data);
                 })
@@ -59,6 +84,11 @@ const BrowseFilterWrapper = (props) => {
         } else if (event.target.name === "reset-btn") {
             setSelectedBrand("");
             setYarnName("");
+            setGaugeInput("");
+            setApproxInput(false);
+            setWeightName("");
+            setTextureInput("");
+            setColorStyleInput("");
             props.getAllYarn();
         }
     };
@@ -99,7 +129,7 @@ const BrowseFilterWrapper = (props) => {
                 </div>
                 <div className="filter">
                     <span className="label">Weight</span>
-                    <select name="yarn-weight-select">
+                    <select name="yarn-weight-select" value={weightName} onChange={handleChange}>
                         <option value=""></option>
                         <option value="Thread">Thread</option>
                         <option value="Cobweb">Cobweb</option>
@@ -112,6 +142,31 @@ const BrowseFilterWrapper = (props) => {
                         <option value="Bulky">Bulky</option>
                         <option value="Super Bulky">Super Bulky</option>
                         <option value="Jumbo">Jumbo</option>
+                    </select>
+                </div>
+                <div className="filter">
+                    <span className="label">Texture</span>
+                    <select name="texture-select" value={textureInput} onChange={handleChange}>
+                        <option value=""></option>
+                        <option value="Single-ply">Single-ply</option>
+                        <option value="Plied (3+)">Plied (3+)</option>
+                        <option value="Cabled">Cabled</option>
+                        <option value="Tape">Tape</option>
+                    </select>
+                </div>
+                <div className="filter">
+                    <span className="label">Color style</span>
+                    <select
+                        name="color-style-select"
+                        value={colorStyleInput}
+                        onChange={handleChange}
+                    >
+                        <option value=""></option>
+                        <option value="Solid">Solid</option>
+                        <option value="Heathered">Heathered</option>
+                        <option value="Semi-solid/Tonal">Semi-solid/Tonal</option>
+                        <option value="Variegated">Variegated</option>
+                        <option value="Self-striping">Self-striping</option>
                     </select>
                 </div>
             </div>
