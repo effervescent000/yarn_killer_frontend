@@ -5,6 +5,8 @@ const BrowseFilterWrapper = (props) => {
     const [brandArray, setBrandArray] = useState([]);
     const [selectedBrand, setSelectedBrand] = useState("");
     const [yarnName, setYarnName] = useState("");
+    const [gaugeInput, setGaugeInput] = useState("");
+    const [approxInput, setApproxInput] = useState(false);
 
     useEffect(() => {
         getBrands();
@@ -34,6 +36,10 @@ const BrowseFilterWrapper = (props) => {
             setSelectedBrand(event.target.value);
         } else if (event.target.name === "yarn-name-input") {
             setYarnName(event.target.value);
+        } else if (event.target.name === "gauge-input") {
+            setGaugeInput(event.target.value);
+        } else if (event.target.name === "approx-input") {
+            setApproxInput(approxInput ? false : true);
         }
     };
 
@@ -77,7 +83,19 @@ const BrowseFilterWrapper = (props) => {
                 </div>
                 <div className="filter">
                     <span className="label">Gauge</span>
-                    <input type="number" />
+                    <input
+                        type="number"
+                        name="gauge-input"
+                        value={gaugeInput}
+                        onChange={handleChange}
+                    />
+                    <span>Approx</span>
+                    <input
+                        type="checkbox"
+                        name="approx-input"
+                        checked={approxInput}
+                        onChange={handleChange}
+                    />
                 </div>
                 <div className="filter">
                     <span className="label">Weight</span>
