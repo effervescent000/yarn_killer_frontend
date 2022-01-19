@@ -9,7 +9,7 @@ const Header = (props) => {
             <div id="left-side-header">
                 <div className="nav-bar">
                     <NavLink to="/yarn/browse">Browse Yarn</NavLink>
-                    <NavLink to="/yarn/add">Add yarn</NavLink>
+                    <NavLink to="/yarn/new/edit">Add yarn</NavLink>
                     <NavLink to="/colorways/manage">Colorways</NavLink>
                 </div>
             </div>

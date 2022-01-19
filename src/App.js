@@ -7,7 +7,7 @@ import Header from "./components/header";
 import HomePage from "./components/home";
 import BrowsePage from "./components/browse/browse-page";
 import YarnDetailPage from "./components/yarn/yarn-detail/yarn-detail-page";
-import YarnCreatePage from "./components/yarn/yarn-create";
+import YarnEditPage from "./components/yarn/yarn-create";
 
 const App = () => {
     return (
@@ -22,8 +22,8 @@ const App = () => {
                         <Route path="/yarn/browse">
                             <BrowsePage />
                         </Route>
-                        <Route path="/yarn/add">
-                            <YarnCreatePage />
+                        <Route path="/yarn/:permalink/edit">
+                            <YarnEditPage />
                         </Route>
                         <Route path="/yarn/:permalink">
                             <YarnDetailPage />
