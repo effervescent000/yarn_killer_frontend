@@ -6,9 +6,18 @@ import YarnForm from "../forms/yarn-form";
 
 const YarnEditPage = (props) => {
     const [formData, setFormData] = useState({});
+    const [yarnData, setYarnData] = useState({});
     const { permalink } = useParams();
 
     useEffect(() => {
+        if (permalink !== "new" && Object.keys(yarnData).length === 0) {
+            axios
+                .get(`${process.env.REACT_APP_DOMAIN}/yarn/get/${permalink}`)
+                .then((response) => {
+                    setYarnData(response.data);
+                })
+                .catch((error) => console.log(error.response));
+        }
         if (Object.keys(formData).length > 0) {
             if (permalink === "new") {
                 axios
@@ -31,11 +40,15 @@ const YarnEditPage = (props) => {
         }
     });
 
-    return (
-        <div id="yarn-create-wrapper">
-            <YarnForm setFormData={setFormData} />
-        </div>
-    );
+    const renderForm = () => {
+        if (permalink === "new") {
+            return <YarnForm setFormData={setFormData} />;
+        } else if (Object.keys(yarnData).length > 0) {
+            return <YarnForm yarnData={yarnData} setFormData={setFormData} />;
+        }
+    };
+
+    return <div id="yarn-edit-wrapper">{renderForm()}</div>;
 };
 
 export default YarnEditPage;

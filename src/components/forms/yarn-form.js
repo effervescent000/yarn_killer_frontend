@@ -15,20 +15,7 @@ import colorStyles from "./helpers/color-styles";
 
 const YarnForm = (props) => {
     const [brandArray, setBrandArray] = useState([]);
-    // const [selectedBrand, setSelectedBrand] = useState(props.formData ? props.formData.brand : "");
-    // const [yarnName, setYarnName] = useState(props.formData ? props.formData.name : "");
-    // const [gaugeInput, setGaugeInput] = useState(props.formData ? props.formData.gauge : "");
-    // const [weightName, setWeightName] = useState(props.formData ? props.formData.weight_name : "");
-    // const [unitWeightInput, setUnitWeightInput] = useState(
-    //     props.formData ? props.formData.unit_weight : ""
-    // );
-    // const [textureInput, setTextureInput] = useState(props.formData ? props.formData.texture : "");
-    // const [colorStyleInput, setColorStyleInput] = useState(
-    //     props.formData ? props.formData.color_style : ""
-    // );
-    // const [discontinuedInput, setDiscontinuedInput] = useState(
-    //     props.formData ? props.formData.discontinued : false
-    // );
+    const { yarnData } = props;
 
     useEffect(() => {
         getBrands();
@@ -57,25 +44,25 @@ const YarnForm = (props) => {
         <div id="yarn-form-wrapper">
             <Formik
                 initialValues={{
-                    brand: "",
-                    name: "",
-                    weightName: "",
-                    gauge: "",
-                    yardage: "",
-                    unitWeight: "",
-                    texture: "",
-                    colorStyle: "",
-                    discontinued: false,
-                    selectFiber1: "",
-                    numberFiber1: "",
-                    selectFiber2: "",
-                    numberFiber2: "",
-                    selectFiber3: "",
-                    numberFiber3: "",
-                    selectFiber4: "",
-                    numberFiber4: "",
-                    selectFiber5: "",
-                    numberFiber5: "",
+                    brand: yarnData.brand || "",
+                    name: yarnData.name || "",
+                    weightName: yarnData.weight_name || "",
+                    gauge: yarnData.gauge || "",
+                    yardage: yarnData.yardage || "",
+                    unitWeight: yarnData.weight_grams || "",
+                    texture: yarnData.texture || "",
+                    colorStyle: yarnData.color_style || "",
+                    discontinued: yarnData.discontinued || false,
+                    selectFiber1: yarnData.fibers[0].type || "",
+                    numberFiber1: yarnData.fibers[0].amount || "",
+                    selectFiber2: yarnData.fibers[1] ? yarnData.fibers[1].type : "",
+                    numberFiber2: yarnData.fibers[1] ? yarnData.fibers[1].amount : "",
+                    selectFiber3: yarnData.fibers[2] ? yarnData.fibers[2].type : "",
+                    numberFiber3: yarnData.fibers[2] ? yarnData.fibers[2].amount : "",
+                    selectFiber4: yarnData.fibers[3] ? yarnData.fibers[3].type : "",
+                    numberFiber4: yarnData.fibers[3] ? yarnData.fibers[3].amount : "",
+                    selectFiber5: yarnData.fibers[4] ? yarnData.fibers[4].type : "",
+                    numberFiber5: yarnData.fibers[4] ? yarnData.fibers[4].amount : "",
                 }}
                 validationSchema={Yup.object({
                     brand: Yup.string().required("Required"),
@@ -101,7 +88,6 @@ const YarnForm = (props) => {
                         {yarnWeights()}
                     </SelectField>
                     <NumberInput label="Gauge" name="gauge" divClass="field-wrapper" />
-                    <NumberInput label="Yarn weight" name="weightName" divClass="field-wrapper" />
                     <NumberInput label="Yardage" name="yardage" divClass="field-wrapper" />
                     <NumberInput label="Unit weight" name="unitWeight" divClass="field-wrapper" />
                     <SelectField label="Texture" name="texture" divClass="field-wrapper">
