@@ -86,6 +86,7 @@ const YarnForm = (props) => {
                         .positive("Must be a positive number")
                         .required("Required"),
                     yardage: Yup.number().integer("Must be an integer"),
+                    unitWeight: Yup.number().integer("Must be an integer"),
                 })}
                 onSubmit={(values) => {
                     props.setFormData(values);
