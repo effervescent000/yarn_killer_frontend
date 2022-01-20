@@ -1,6 +1,12 @@
 #yarn-detail-page-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+
+    #admin-wrapper {
+        display: grid;
+        gap: 20px;
+    }
+
     #grid-wrapper {
         display: grid;
         grid-template-columns: 1fr 1fr;

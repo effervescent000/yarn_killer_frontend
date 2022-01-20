@@ -1,0 +1,25 @@
+#yarn-form-wrapper {
+    form {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 25%;
+        .field-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        #gauge-wrapper {
+            div {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        #fibers-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.error {
+    border: 1px red solid;
+}
