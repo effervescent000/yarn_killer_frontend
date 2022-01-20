@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 
-import YarnForm from "../yarn-form";
+import YarnForm from "../forms/yarn-form";
 
 const YarnEditPage = (props) => {
     const [formData, setFormData] = useState({});

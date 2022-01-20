@@ -7,7 +7,7 @@ import Header from "./components/header";
 import HomePage from "./components/home";
 import BrowsePage from "./components/browse/browse-page";
 import YarnDetailPage from "./components/yarn/yarn-detail/yarn-detail-page";
-import YarnEditPage from "./components/yarn/yarn-create";
+import YarnEditPage from "./components/yarn/yarn-edit";
 
 const App = () => {
     return (
