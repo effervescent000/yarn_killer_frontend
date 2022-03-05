@@ -4,7 +4,7 @@ import { useField } from "formik";
 const SelectField = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
-        <div className={props.divClass}>
+        <div className={props.divclass}>
             <label htmlFor={props.id || props.name}>{label}</label>
             <select
                 className={`select-input ${meta.error && meta.touched ? "error" : null}`}

@@ -2,13 +2,11 @@ import React from "react";
 
 import StoreLink from "./store-link";
 
-const StoreLinksWrapper = (props) => {
-    const { yarn } = props;
-
+const StoreLinksWrapper = ({ yarn }) => {
     const renderHeader = () => {
         if (yarn.links && yarn.links.length > 0) {
             return (
-                <div id="links-header">
+                <div id="links-header" className="link-grid">
                     <div>Store</div>
                     <div>Current price</div>
                     <div>Price last checked</div>
@@ -24,7 +22,7 @@ const StoreLinksWrapper = (props) => {
     };
 
     return (
-        <div>
+        <div id="store-links-wrapper">
             {renderHeader()}
             {populateLinks()}
         </div>

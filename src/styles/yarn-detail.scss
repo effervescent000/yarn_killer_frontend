@@ -24,5 +24,13 @@
                 }
             }
         }
+        #right-side-grid {
+            #store-links-wrapper {
+                .link-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+            }
+        }
     }
 }
