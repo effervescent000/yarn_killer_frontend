@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Formik, Form } from "formik";
+import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
 
 import TextInput from "./form-components/text-input";
@@ -44,25 +44,20 @@ const YarnForm = (props) => {
         <div id="yarn-form-wrapper">
             <Formik
                 initialValues={{
-                    brand: yarnData.brand || "",
-                    name: yarnData.name || "",
-                    weightName: yarnData.weight_name || "",
-                    gauge: yarnData.gauge || "",
-                    yardage: yarnData.yardage || "",
-                    unitWeight: yarnData.weight_grams || "",
-                    texture: yarnData.texture || "",
-                    colorStyle: yarnData.color_style || "",
-                    discontinued: yarnData.discontinued || false,
-                    selectFiber1: yarnData.fibers[0].type || "",
-                    numberFiber1: yarnData.fibers[0].amount || "",
-                    selectFiber2: yarnData.fibers[1] ? yarnData.fibers[1].type : "",
-                    numberFiber2: yarnData.fibers[1] ? yarnData.fibers[1].amount : "",
-                    selectFiber3: yarnData.fibers[2] ? yarnData.fibers[2].type : "",
-                    numberFiber3: yarnData.fibers[2] ? yarnData.fibers[2].amount : "",
-                    selectFiber4: yarnData.fibers[3] ? yarnData.fibers[3].type : "",
-                    numberFiber4: yarnData.fibers[3] ? yarnData.fibers[3].amount : "",
-                    selectFiber5: yarnData.fibers[4] ? yarnData.fibers[4].type : "",
-                    numberFiber5: yarnData.fibers[4] ? yarnData.fibers[4].amount : "",
+                    brand: yarnData ? yarnData.brand : "",
+                    name: yarnData ? yarnData.name : "",
+                    weightName: yarnData ? yarnData.weight_name : "",
+                    gauge: yarnData ? yarnData.gauge : "",
+                    yardage: yarnData ? yarnData.yardage : "",
+                    unitWeight: yarnData ? yarnData.weight_grams : "",
+                    texture: yarnData ? yarnData.texture : "",
+                    colorStyle: yarnData ? yarnData.color_style : "",
+                    discontinued: yarnData ? yarnData.discontinued : false,
+                    fibers: yarnData
+                        ? yarnData.fibers.map((fiber) => {
+                              return { type: fiber.type, amount: fiber.amount };
+                          })
+                        : [],
                 }}
                 validationSchema={Yup.object({
                     brand: Yup.string().required("Required"),
@@ -79,34 +74,70 @@ const YarnForm = (props) => {
                     props.setFormData(values);
                 }}
             >
-                <Form>
-                    <SelectField label="Brand name" name="brand" divClass="field-wrapper">
-                        {populateBrandsSelect()}
-                    </SelectField>
-                    <TextInput label="Yarn name" name="name" divClass="field-wrapper" />
-                    <SelectField label="Yarn weight" name="weightName" divClass="field-wrapper">
-                        {yarnWeights()}
-                    </SelectField>
-                    <NumberInput label="Gauge" name="gauge" divClass="field-wrapper" />
-                    <NumberInput label="Yardage" name="yardage" divClass="field-wrapper" />
-                    <NumberInput label="Unit weight" name="unitWeight" divClass="field-wrapper" />
-                    <SelectField label="Texture" name="texture" divClass="field-wrapper">
-                        {yarnTextures()}
-                    </SelectField>
-                    <SelectField label="Color style" name="colorStyle" divClass="field-wrapper">
-                        {colorStyles()}
-                    </SelectField>
-                    <CheckboxInput name="discontinued">Discontinued?</CheckboxInput>
-                    <div id="fibers-wrapper">
-                        <FiberInput label="Fiber Input 1" name="Fiber1" />
-                        <FiberInput label="Fiber Input 2" name="Fiber2" />
-                        <FiberInput label="Fiber Input 3" name="Fiber3" />
-                        <FiberInput label="Fiber Input 4" name="Fiber4" />
-                        <FiberInput label="Fiber Input 5" name="Fiber5" />
-                    </div>
-
-                    <button type="submit">Save</button>
-                </Form>
+                {({ values }) => {
+                    return (
+                        <Form>
+                            <TextInput label="Brand name" name="brand" divclass="field-wrapper" />
+                            <TextInput label="Yarn name" name="name" divclass="field-wrapper" />
+                            <SelectField
+                                label="Yarn weight"
+                                name="weightName"
+                                divclass="field-wrapper"
+                            >
+                                {yarnWeights()}
+                            </SelectField>
+                            <NumberInput label="Gauge" name="gauge" divclass="field-wrapper" />
+                            <NumberInput label="Yardage" name="yardage" divclass="field-wrapper" />
+                            <NumberInput
+                                label="Unit weight"
+                                name="unitWeight"
+                                divclass="field-wrapper"
+                            />
+                            <SelectField label="Texture" name="texture" divclass="field-wrapper">
+                                {yarnTextures()}
+                            </SelectField>
+                            <SelectField
+                                label="Color style"
+                                name="colorStyle"
+                                divclass="field-wrapper"
+                            >
+                                {colorStyles()}
+                            </SelectField>
+                            <CheckboxInput name="discontinued">Discontinued?</CheckboxInput>
+                            <FieldArray name="fibers">
+                                {({ remove, push }) => {
+                                    return (
+                                        <div id="fibers-wrapper">
+                                            {values.fibers.map((_, index) => {
+                                                return (
+                                                    <div
+                                                        className="fiber-wrapper"
+                                                        key={`fiber-${index}`}
+                                                    >
+                                                        <FiberInput name={`fibers.${index}`} />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => remove(index)}
+                                                        >
+                                                            -
+                                                        </button>
+                                                    </div>
+                                                );
+                                            })}
+                                            <button
+                                                type="button"
+                                                onClick={() => push({ type: "", amount: "" })}
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    );
+                                }}
+                            </FieldArray>
+                            <button type="submit">Save</button>
+                        </Form>
+                    );
+                }}
             </Formik>
         </div>
     );

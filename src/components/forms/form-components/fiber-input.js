@@ -13,10 +13,10 @@ const FiberInput = ({ label, ...props }) => {
         <div>
             <label>{label}</label>
             <div>
-                <SelectField label="Fiber" name={`select${props.name}`}>
+                <SelectField label="Fiber" name={`${props.name}.type`}>
                     {fiberTypes()}
                 </SelectField>
-                <NumberInput label="%" name={`number${props.name}`} />
+                <NumberInput label="%" name={`${props.name}.amount`} />
             </div>
         </div>
     );
