@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import { useParams } from "react-router";
 
 import YarnStats from "./yarn-stats";
+import StoreLinksWrapper from "./store-links-wrapper";
 
 const YarnDetailPage = (props) => {
     const [yarn, setYarn] = useState({});
@@ -51,6 +52,10 @@ const YarnDetailPage = (props) => {
                     <div id="brand-name">{yarn.brand}</div>
                     <div id="yarn-name">{yarn.name}</div>
                     <YarnStats yarn={yarn} />
+                </div>
+                <div id="right-side-grid">
+                    {/* stash stuff here maybe if I do that */}
+                    <StoreLinksWrapper yarn={yarn} />
                 </div>
             </div>
             <div />

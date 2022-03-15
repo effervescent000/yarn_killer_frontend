@@ -1,10 +1,14 @@
 import React from "react";
+import { Spinner } from "reactstrap";
 
 import BrowseItem from "./browse-item";
 
-const BrowseResultsContainer = (props) => {
+const BrowseResultsContainer = ({ yarnResults }) => {
     const populateResults = () => {
-        return props.yarnResults.map((yarn) => {
+        if (yarnResults.length === 0) {
+            return <Spinner />;
+        }
+        return yarnResults.map((yarn) => {
             return <BrowseItem key={yarn.id} yarn={yarn} />;
         });
     };

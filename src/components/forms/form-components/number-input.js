@@ -4,7 +4,7 @@ import { useField } from "formik";
 const NumberInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
-        <div className={props.divClass}>
+        <div className={props.divclass}>
             <label htmlFor={props.id || props.name}>{label}</label>
             <input
                 className={`number-input ${meta.error && meta.touched ? "error" : null}`}

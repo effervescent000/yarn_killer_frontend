@@ -11,10 +11,27 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         #left-side-grid {
+            #brand-name {
+                font-size: 1.75em;
+            }
+            #yarn-name {
+                font-size: 1.5em;
+            }
             #stats-grid {
                 .attribute {
                     display: grid;
                     grid-template-columns: 1fr 1fr;
+                }
+            }
+        }
+        #right-side-grid {
+            #store-links-wrapper {
+                table {
+                    color: $primary-text-color;
+                }
+                .link-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
                 }
             }
         }
