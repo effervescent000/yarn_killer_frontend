@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { Formik, Form, FieldArray } from "formik";
 import * as Yup from "yup";
 
@@ -14,31 +13,7 @@ import yarnTextures from "./helpers/yarn-textures";
 import colorStyles from "./helpers/color-styles";
 
 const YarnForm = (props) => {
-    const [brandArray, setBrandArray] = useState([]);
     const { yarnData } = props;
-
-    useEffect(() => {
-        getBrands();
-    }, []);
-
-    const getBrands = () => {
-        axios
-            .get(`${process.env.REACT_APP_DOMAIN}/yarn/brands`)
-            .then((response) => {
-                response.data.sort();
-                response.data.unshift("");
-                setBrandArray(response.data);
-            })
-            .catch((error) => console.log(error.response));
-    };
-
-    const populateBrandsSelect = () => {
-        return brandArray.map((brand) => (
-            <option key={brand} value={brand}>
-                {brand}
-            </option>
-        ));
-    };
 
     return (
         <div id="yarn-form-wrapper">

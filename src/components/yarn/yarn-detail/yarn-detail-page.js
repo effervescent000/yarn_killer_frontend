@@ -6,6 +6,7 @@ import { useParams } from "react-router";
 
 import YarnStats from "./yarn-stats";
 import StoreLinksWrapper from "./store-links-wrapper";
+import YarnImageWrapper from "./yarn-image-wrapper";
 
 const YarnDetailPage = (props) => {
     const [yarn, setYarn] = useState({});
@@ -48,7 +49,7 @@ const YarnDetailPage = (props) => {
             </div>
             <div id="grid-wrapper">
                 <div id="left-side-grid">
-                    <span>Image goes here</span>
+                    <YarnImageWrapper yarn={yarn} setYarn={setYarn} />
                     <div id="brand-name">{yarn.brand}</div>
                     <div id="yarn-name">{yarn.name}</div>
                     <YarnStats yarn={yarn} />
