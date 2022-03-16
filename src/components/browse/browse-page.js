@@ -6,6 +6,7 @@ import BrowseFilterWrapper from "./browse-filter-wrapper";
 
 const BrowseYarnPage = (props) => {
     const [yarnResults, setYarnResults] = useState([]);
+    const [fetching, setFetching] = useState(false);
 
     useEffect(() => {
         if (yarnResults.length === 0) {
@@ -14,17 +15,19 @@ const BrowseYarnPage = (props) => {
     }, []);
 
     const getAllYarn = () => {
+        setFetching(true);
         axios
             .get(`${process.env.REACT_APP_DOMAIN}/yarn/get`)
             .then((response) => {
                 setYarnResults(response.data);
+                setFetching(false);
             })
             .catch((error) => console.log(error.response));
     };
 
     return (
         <div id="browse-content-wrapper">
-            <BrowseResultsContainer yarnResults={yarnResults} />
+            <BrowseResultsContainer yarnResults={yarnResults} fetching={fetching} />
             <BrowseFilterWrapper getAllYarn={getAllYarn} setYarnResults={setYarnResults} />
         </div>
     );

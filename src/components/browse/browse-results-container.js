@@ -3,9 +3,9 @@ import { Spinner } from "reactstrap";
 
 import BrowseItem from "./browse-item";
 
-const BrowseResultsContainer = ({ yarnResults }) => {
+const BrowseResultsContainer = ({ yarnResults, fetching }) => {
     const populateResults = () => {
-        if (yarnResults.length === 0) {
+        if (fetching) {
             return <Spinner />;
         }
         return yarnResults.map((yarn) => {
