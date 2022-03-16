@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Yarn image carousel tests Hidden if no images 1`] = `
+<div
+  className="image-wrapper"
+>
+  <div
+    className="carousel-wrapper"
+  >
+    <button
+      className="add-image-btn"
+      onClick={[Function]}
+    >
+      Add an image
+    </button>
+  </div>
+</div>
+`;

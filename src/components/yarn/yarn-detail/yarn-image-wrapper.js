@@ -46,7 +46,7 @@ const YarnImageWrapper = ({ yarn, setYarn }) => {
     return Object.keys(yarn).length > 0 ? (
         <div className="image-wrapper">
             <div className="carousel-wrapper">
-                <UncontrolledCarousel items={constructItems()} />
+                {yarn.images.length > 0 ? <UncontrolledCarousel items={constructItems()} /> : null}
                 <button
                     className="add-image-btn"
                     onClick={() => setAddImageIsOpen(!addImageIsOpen)}

@@ -1,7 +1,10 @@
+import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import axios from "axios";
 import renderer from "react-test-renderer";
 
-import BrowseItem from "./browse-item";
-import { routerWrapper } from "../../testutils";
+import { renderWithRouter, routerWrapper } from "../../../testutils";
+import YarnImageWrapper from "./yarn-image-wrapper";
 
 const yarnArray = [
     {
@@ -60,15 +63,16 @@ const yarnArray = [
     },
 ];
 
-describe("BrowseItem tests", () => {
-    test("Renders with image", () => {
-        const yarn = yarnArray[0];
-        const tree = renderer.create(routerWrapper(<BrowseItem yarn={yarn} />)).toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-    test("Renders without image", () => {
+describe("Yarn image carousel tests", () => {
+    test("Hidden if no images", () => {
         const yarn = yarnArray[1];
-        const tree = renderer.create(routerWrapper(<BrowseItem yarn={yarn} />)).toJSON();
+        const setYarn = jest.fn();
+        renderWithRouter(<YarnImageWrapper yarn={yarn} setYarn={setYarn} />);
+        // there should only be the "add an image" button
+        expect(screen.getAllByRole("button")).toHaveLength(1);
+        const tree = renderer
+            .create(routerWrapper(<YarnImageWrapper yarn={yarn} setYarn={setYarn} />))
+            .toJSON();
         expect(tree).toMatchSnapshot();
     });
 });
