@@ -8,7 +8,7 @@ const BrowseItem = (props) => {
         <div className="yarn-item">
             <Link to={`/yarn/${id}`}>
                 <div className="image-wrapper">
-                    {images ? <img src={images[0].url} alt={`${brand} ${name}`} /> : null}
+                    {images[0] ? <img src={images[0].url} alt={`${brand} ${name}`} /> : null}
                 </div>
                 <div className="text-wrapper">
                     <div className="yarn-brand">{brand}</div>
