@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrowseItem tests Renders with image 1`] = `
+<div
+  className="yarn-item"
+>
+  <a
+    href="/yarn/1"
+    onClick={[Function]}
+  >
+    <div
+      className="image-wrapper"
+    >
+      <img
+        alt="Red Heart Super Saver Solids"
+        src="https://images4-g.ravelrycache.com/uploads/redheartyarns/797884997/upload"
+      />
+    </div>
+    <div
+      className="text-wrapper"
+    >
+      <div
+        className="yarn-brand"
+      >
+        Red Heart
+      </div>
+      <div
+        className="yarn-name"
+      >
+        Super Saver Solids
+      </div>
+    </div>
+  </a>
+</div>
+`;
+
+exports[`BrowseItem tests Renders without image 1`] = `
+<div
+  className="yarn-item"
+>
+  <a
+    href="/yarn/2"
+    onClick={[Function]}
+  >
+    <div
+      className="image-wrapper"
+    />
+    <div
+      className="text-wrapper"
+    >
+      <div
+        className="yarn-brand"
+      >
+        Caron
+      </div>
+      <div
+        className="yarn-name"
+      >
+        Simply Soft Solids
+      </div>
+    </div>
+  </a>
+</div>
+`;

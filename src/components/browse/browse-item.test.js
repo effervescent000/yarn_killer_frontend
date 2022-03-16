@@ -1,4 +1,6 @@
 import { render, screen, waitFor } from "@testing-library/react";
+import renderer from "react-test-renderer";
+import { MemoryRouter } from "react-router-dom";
 
 import BrowseItem from "./browse-item";
 import { renderWithRouter } from "../../testutils";
@@ -63,13 +65,24 @@ const yarnArray = [
 describe("BrowseItem tests", () => {
     test("Renders with image", () => {
         const yarn = yarnArray[0];
-        renderWithRouter(<BrowseItem yarn={yarn} />);
-        expect(screen.getByAltText(`${yarn.brand} ${yarn.name}`)).toBeInTheDocument();
+        const tree = renderer
+            .create(
+                <MemoryRouter>
+                    <BrowseItem yarn={yarn} />
+                </MemoryRouter>
+            )
+            .toJSON();
+        expect(tree).toMatchSnapshot();
     });
     test("Renders without image", () => {
         const yarn = yarnArray[1];
-        renderWithRouter(<BrowseItem yarn={yarn} />);
-        expect(screen.queryByAltText(`${yarn.brand} ${yarn.name}`)).toBeNull();
-        expect(screen.getByText(new RegExp(yarn.brand))).toBeInTheDocument();
+        const tree = renderer
+            .create(
+                <MemoryRouter>
+                    <BrowseItem yarn={yarn} />
+                </MemoryRouter>
+            )
+            .toJSON();
+        expect(tree).toMatchSnapshot();
     });
 });
