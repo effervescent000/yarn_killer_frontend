@@ -11,6 +11,27 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         #left-side-grid {
+            .image-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .carousel-wrapper {
+                    position: relative;
+                    width: 90%;
+                    button.add-image-btn {
+                        position: absolute;
+                        bottom: 0;
+                        z-index: 10;
+                    }
+                    .carousel {
+                        display: flex;
+                        justify-content: center;
+                        .carousel-inner {
+                            width: 75%;
+                        }
+                    }
+                }
+            }
             #brand-name {
                 font-size: 1.75em;
             }

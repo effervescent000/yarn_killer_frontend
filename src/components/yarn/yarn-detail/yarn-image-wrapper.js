@@ -45,7 +45,12 @@ const YarnImageWrapper = ({ yarn, setYarn }) => {
         <div className="image-wrapper">
             <div className="carousel-wrapper">
                 <UncontrolledCarousel items={constructItems()} />
-                <button onClick={() => setAddImageIsOpen(!addImageIsOpen)}>Add an image</button>
+                <button
+                    className="add-image-btn"
+                    onClick={() => setAddImageIsOpen(!addImageIsOpen)}
+                >
+                    Add an image
+                </button>
             </div>
 
             {addImageIsOpen ? (
