@@ -28,16 +28,18 @@ const YarnImageWrapper = ({ yarn, setYarn }) => {
     };
 
     const handleKeyUp = (event) => {
-        if (event.key === "Enter") {
-            axios
-                .post(`${process.env.REACT_APP_DOMAIN}/yarn/image`, {
-                    yarn_id: yarn.id,
-                    url: imageUrlInput,
-                })
-                .then((response) => {
-                    setYarn({ ...yarn, images: [...yarn.images, response.data] });
-                })
-                .catch((error) => console.log(error.response));
+        if (event.target.name === "img-url-input") {
+            if (event.key === "Enter") {
+                axios
+                    .post(`${process.env.REACT_APP_DOMAIN}/yarn/image`, {
+                        yarn_id: yarn.id,
+                        url: imageUrlInput,
+                    })
+                    .then((response) => {
+                        setYarn({ ...yarn, images: [...yarn.images, response.data] });
+                    })
+                    .catch((error) => console.log(error.response));
+            }
         }
     };
 

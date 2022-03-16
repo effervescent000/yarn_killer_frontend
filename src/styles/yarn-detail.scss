@@ -28,6 +28,9 @@
                         justify-content: center;
                         .carousel-inner {
                             width: 75%;
+                            img {
+                                border-radius: 5%;
+                            }
                         }
                     }
                 }

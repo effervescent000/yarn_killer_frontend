@@ -9,13 +9,19 @@
         justify-items: center;
         gap: 10px;
         border: 2px solid $primary-accent-color;
-        padding: 20px;
+        padding: 2em;
         align-items: center;
 
         .yarn-item {
             border: 1px solid $secondary-accent-color;
             padding: 12px;
             text-align: center;
+            width: 100%;
+            .image-wrapper {
+                img {
+                    height: 10em;
+                }
+            }
         }
     }
     #filter-form-wrapper {
