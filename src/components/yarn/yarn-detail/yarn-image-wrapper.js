@@ -35,7 +35,7 @@ const YarnImageWrapper = ({ yarn, setYarn }) => {
                     url: imageUrlInput,
                 })
                 .then((response) => {
-                    setYarn({ ...yarn, images: [...yarn.images, imageUrlInput] });
+                    setYarn({ ...yarn, images: [...yarn.images, response.data] });
                 })
                 .catch((error) => console.log(error.response));
         }
