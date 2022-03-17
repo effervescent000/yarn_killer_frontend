@@ -27,18 +27,20 @@ const YarnImageWrapper = ({ yarn, setYarn }) => {
         return items;
     };
 
-    const handleKeyUp = (event) => {
+    const handleKeyUp = async (event) => {
         if (event.target.name === "img-url-input") {
             if (event.key === "Enter") {
-                axios
-                    .post(`${process.env.REACT_APP_DOMAIN}/yarn/image`, {
+                try {
+                    const res = await axios.post(`${process.env.REACT_APP_DOMAIN}/yarn/image`, {
                         yarn_id: yarn.id,
                         url: imageUrlInput,
-                    })
-                    .then((response) => {
-                        setYarn({ ...yarn, images: [...yarn.images, response.data] });
-                    })
-                    .catch((error) => console.log(error.response));
+                    });
+                    setImageUrlInput("");
+                    setYarn({ ...yarn, images: [...yarn.images, res.data] });
+                    return res;
+                } catch (error) {
+                    console.log(error);
+                }
             }
         }
     };
@@ -62,6 +64,7 @@ const YarnImageWrapper = ({ yarn, setYarn }) => {
                     value={imageUrlInput}
                     onChange={handleChange}
                     onKeyUp={handleKeyUp}
+                    placeholder="Image URL here"
                 />
             ) : null}
         </div>
