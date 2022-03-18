@@ -53,6 +53,11 @@
                 table {
                     color: $primary-text-color;
                 }
+                .input-wrapper {
+                    button#add-link-btn {
+                        width: 9em;
+                    }
+                }
                 .link-grid {
                     display: grid;
                     grid-template-columns: 1fr 1fr 1fr;

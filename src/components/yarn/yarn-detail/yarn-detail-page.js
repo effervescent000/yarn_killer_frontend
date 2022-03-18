@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { useParams } from "react-router";
 
 import YarnStats from "./yarn-stats";
-import StoreLinksWrapper from "./store-links-wrapper";
+import StoreLinksWrapper from "./links/store-links-wrapper";
 import YarnImageWrapper from "./yarn-image-wrapper";
 
 const YarnDetailPage = (props) => {
@@ -56,7 +56,7 @@ const YarnDetailPage = (props) => {
                 </div>
                 <div id="right-side-grid">
                     {/* stash stuff here maybe if I do that */}
-                    <StoreLinksWrapper yarn={yarn} />
+                    <StoreLinksWrapper yarn={yarn} setYarn={setYarn} />
                 </div>
             </div>
             <div />

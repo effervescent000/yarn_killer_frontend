@@ -1,20 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Table } from "reactstrap";
 
 import StoreLink from "./store-link";
 
-const StoreLinksWrapper = ({ yarn }) => {
+const StoreLinksWrapper = ({ yarn, setYarn }) => {
     const [showInput, setShowInput] = useState(false);
     const [linkInput, setLinkInput] = useState("");
 
     const renderHeader = () => {
         if (yarn.links && yarn.links.length > 0) {
             return (
-                // <div id="links-header" className="link-grid">
-                //     <div>Store</div>
-                //     <div>Current price</div>
-                //     <div>Price last checked</div>
-                // </div>
                 <thead>
                     <th>Store</th>
                     <th>Current price</th>
@@ -36,6 +32,46 @@ const StoreLinksWrapper = ({ yarn }) => {
         }
     };
 
+    const getStoreName = (url) => {
+        switch (url.match(/www\.*\.com/)) {
+            case "www.michaels.com":
+                return "Michael's";
+            case "www.joann.com":
+                return "Joann";
+            default:
+                return "error";
+        }
+    };
+
+    const handleKeyUp = (event) => {
+        if (event.target.name === "link-input") {
+            if (event.key === "Enter") {
+                postLink();
+            }
+        }
+    };
+
+    const postLink = () => {
+        const store = getStoreName(linkInput);
+        axios
+            .post(`${process.env.REACT_APP_DOMAIN}/yarn/link`, {
+                yarn_id: yarn.id,
+                url: linkInput,
+                store: store,
+            })
+            .then((response) => {
+                setYarn({ ...yarn, links: [...yarn.links, response.data] });
+                setLinkInput("");
+            })
+            .catch((error) => console.log(error.response));
+    };
+
+    const handleClick = (event) => {
+        if (event.target.name === "save-link-btn") {
+            postLink();
+        }
+    };
+
     return (
         <div id="store-links-wrapper">
             <Table>
@@ -48,6 +84,7 @@ const StoreLinksWrapper = ({ yarn }) => {
                     onClick={() => {
                         setShowInput(!showInput);
                     }}
+                    id="add-link-btn"
                 >
                     {showInput ? <>Hide input form</> : <>Add link</>}
                 </button>
@@ -59,7 +96,16 @@ const StoreLinksWrapper = ({ yarn }) => {
                             name="link-input"
                             value={linkInput}
                             onChange={handleChange}
+                            onKeyUp={handleKeyUp}
                         />
+                        <button
+                            id="save-link-btn"
+                            type="button"
+                            name="save-link-btn"
+                            onClick={handleClick}
+                        >
+                            Save
+                        </button>
                     </form>
                 ) : null}
             </div>
