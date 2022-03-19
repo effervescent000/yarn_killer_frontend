@@ -11,6 +11,7 @@ const routerWrapper = (ui) => {
 
 const yarnArray = [
     {
+        // this one should have 1+ image and 1+ link
         brand: "Red Heart",
         color_style: "",
         colorways: [],
@@ -34,7 +35,17 @@ const yarnArray = [
                 yarn_id: 1,
             },
         ],
-        links: [],
+        links: [
+            {
+                id: 10,
+                url: "www.michaels.com/aegjnakg",
+                store_id: 5,
+                yarn_id: 1,
+                current_price: null,
+                price_updated: null,
+                store: "Michael's",
+            },
+        ],
         name: "Super Saver Solids",
         texture: "Cabled",
         weight_grams: 198,
@@ -42,6 +53,7 @@ const yarnArray = [
         yardage: 364,
     },
     {
+        // this one should have no images
         brand: "Caron",
         color_style: "",
         colorways: [],

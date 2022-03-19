@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import renderer from "react-test-renderer";
 
-import { renderWithRouter, routerWrapper, yarnArray } from "../../../../testutils";
+import { yarnArray } from "../../../../testutils";
 import StoreLinksWrapper from "./store-links-wrapper";
 
 jest.mock("axios");

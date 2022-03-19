@@ -12,9 +12,11 @@ const StoreLinksWrapper = ({ yarn, setYarn }) => {
         if (yarn.links && yarn.links.length > 0) {
             return (
                 <thead>
-                    <th>Store</th>
-                    <th>Current price</th>
-                    <th>Last checked</th>
+                    <tr>
+                        <th>Store</th>
+                        <th>Current price</th>
+                        <th>Last checked</th>
+                    </tr>
                 </thead>
             );
         }
