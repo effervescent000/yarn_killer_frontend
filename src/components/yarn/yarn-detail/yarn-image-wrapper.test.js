@@ -1,9 +1,9 @@
-import { screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import renderer from "react-test-renderer";
 
-import { renderWithRouter, routerWrapper, yarnArray } from "../../../testutils";
+import { wrapWithMemoryRouter, yarnArray } from "../../../testutils";
 import YarnImageWrapper from "./yarn-image-wrapper";
 
 jest.mock("axios");
@@ -12,11 +12,11 @@ describe("Yarn image carousel tests", () => {
     test("Hidden if no images", () => {
         const yarn = yarnArray[1];
         const setYarn = jest.fn();
-        renderWithRouter(<YarnImageWrapper yarn={yarn} setYarn={setYarn} />);
+        render(wrapWithMemoryRouter(<YarnImageWrapper yarn={yarn} setYarn={setYarn} />));
         // there should only be the "add an image" button
         expect(screen.getAllByRole("button")).toHaveLength(1);
         const tree = renderer
-            .create(routerWrapper(<YarnImageWrapper yarn={yarn} setYarn={setYarn} />))
+            .create(wrapWithMemoryRouter(<YarnImageWrapper yarn={yarn} setYarn={setYarn} />))
             .toJSON();
         expect(tree).toMatchSnapshot();
     });
@@ -24,7 +24,7 @@ describe("Yarn image carousel tests", () => {
         const yarn = yarnArray[1];
         const setYarn = jest.fn();
         // ensure input starts closed
-        renderWithRouter(<YarnImageWrapper yarn={yarn} setYarn={setYarn} />);
+        render(wrapWithMemoryRouter(<YarnImageWrapper yarn={yarn} setYarn={setYarn} />));
         expect(screen.queryByPlaceholderText("Image URL here")).toBeNull();
 
         const addImageButton = screen.getByText("Add an image");

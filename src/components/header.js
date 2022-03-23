@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import catLogoWhite from "../static/assets/cat with yarn white.png";
+import AccountStatusWrapper from "./auth/account-status";
 
 const Header = (props) => {
     return (
@@ -20,7 +21,7 @@ const Header = (props) => {
                 </div>
             </div>
             <div id="right-side-header">
-                <span>Login stuff will go here</span>
+                <AccountStatusWrapper />
             </div>
         </div>
     );

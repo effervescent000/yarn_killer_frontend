@@ -16,7 +16,7 @@ const YarnDetailPage = (props) => {
     useEffect(() => {
         if (Object.keys(yarn).length === 0) {
             axios
-                .get(`${process.env.REACT_APP_DOMAIN}/yarn/get/${permalink}`)
+                .get(`${process.env.REACT_APP_DOMAIN}/yarn/${permalink}`)
                 .then((response) => {
                     setYarn(response.data);
                 })
@@ -27,7 +27,7 @@ const YarnDetailPage = (props) => {
     const handleClick = (event) => {
         if (event.target.name === "delete-link") {
             axios
-                .delete(`${process.env.REACT_APP_DOMAIN}/yarn/delete/${yarn.id}`)
+                .delete(`${process.env.REACT_APP_DOMAIN}/yarn/${yarn.id}`)
                 .then((response) => {
                     history.push("/");
                 })
