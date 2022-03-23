@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
@@ -7,11 +7,13 @@ import { useParams } from "react-router";
 import YarnStats from "./yarn-stats";
 import StoreLinksWrapper from "./links/store-links-wrapper";
 import YarnImageWrapper from "./yarn-image-wrapper";
+import { UserContext } from "../../../user-context";
 
 const YarnDetailPage = (props) => {
     const [yarn, setYarn] = useState({});
     const { permalink } = useParams();
     const history = useHistory();
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         if (Object.keys(yarn).length === 0) {
@@ -38,14 +40,18 @@ const YarnDetailPage = (props) => {
     return (
         <div id="yarn-detail-page-wrapper">
             <div id="admin-wrapper">
-                <div className="link-wrapper">
-                    <Link to={`/yarn/${yarn.id}/edit`}>Edit yarn</Link>
-                </div>
-                <div className="link-wrapper">
-                    <button name="delete-link" className="link-btn" onClick={handleClick}>
-                        Delete yarn
-                    </button>
-                </div>
+                {user.role == "admin" ? (
+                    <>
+                        <div className="link-wrapper">
+                            <Link to={`/yarn/${yarn.id}/edit`}>Edit yarn</Link>
+                        </div>
+                        <div className="link-wrapper">
+                            <button name="delete-link" className="link-btn" onClick={handleClick}>
+                                Delete yarn
+                            </button>
+                        </div>
+                    </>
+                ) : null}
             </div>
             <div id="grid-wrapper">
                 <div id="left-side-grid">

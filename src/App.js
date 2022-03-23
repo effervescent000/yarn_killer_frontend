@@ -38,6 +38,14 @@ const App = () => {
         }
     }, []);
 
+    const adminRoutes = () => {
+        return user.role == "admin" ? (
+            <Route path="/yarn/:permalink/edit">
+                <YarnEditPage />
+            </Route>
+        ) : null;
+    };
+
     return (
         <Router>
             <UserContext.Provider value={{ loggedIn, toggleLogIn, user, setUser }}>
@@ -51,12 +59,10 @@ const App = () => {
                             <Route path="/yarn/browse">
                                 <BrowsePage />
                             </Route>
-                            <Route path="/yarn/:permalink/edit">
-                                <YarnEditPage />
-                            </Route>
                             <Route path="/yarn/:permalink">
                                 <YarnDetailPage />
                             </Route>
+                            {adminRoutes()}
                         </Switch>
                     </div>
                 </div>
