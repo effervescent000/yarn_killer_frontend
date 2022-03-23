@@ -1,6 +1,6 @@
 #yarn-detail-page-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
 
     #admin-wrapper {
         display: grid;
@@ -52,6 +52,11 @@
             #store-links-wrapper {
                 table {
                     color: $primary-text-color;
+                }
+                .input-wrapper {
+                    button#add-link-btn {
+                        width: 9em;
+                    }
                 }
                 .link-grid {
                     display: grid;

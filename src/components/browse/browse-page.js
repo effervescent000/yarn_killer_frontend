@@ -17,7 +17,7 @@ const BrowseYarnPage = (props) => {
     const getAllYarn = () => {
         setFetching(true);
         axios
-            .get(`${process.env.REACT_APP_DOMAIN}/yarn/get`)
+            .get(`${process.env.REACT_APP_DOMAIN}/yarn`)
             .then((response) => {
                 setYarnResults(response.data);
                 setFetching(false);
