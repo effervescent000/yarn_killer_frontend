@@ -4,7 +4,7 @@ import { Table } from "reactstrap";
 
 import StoreLink from "./store-link";
 
-const StoreLinksWrapper = ({ yarn, setYarn }) => {
+const StoreLinksWrapper = ({ yarn, setYarn, getYarn }) => {
     const [showInput, setShowInput] = useState(false);
     const [linkInput, setLinkInput] = useState("");
 
@@ -16,15 +16,41 @@ const StoreLinksWrapper = ({ yarn, setYarn }) => {
                         <th>Store</th>
                         <th>Current price</th>
                         <th>Last checked</th>
+                        <th></th>
                     </tr>
                 </thead>
             );
         }
     };
 
+    const deleteLink = (link) => {
+        axios
+            .delete(`${process.env.REACT_APP_DOMAIN}/link/${link.id}`)
+            .then((response) => {
+                getYarn();
+            })
+            .catch((error) => console.log(error.response));
+    };
+
+    const updateLink = (link) => {
+        axios
+            .put(`${process.env.REACT_APP_DOMAIN}/link/${link.id}`)
+            .then((response) => {
+                getYarn();
+            })
+            .catch((error) => console.log(error.response));
+    };
+
     const populateLinks = () => {
         if (Object.keys(yarn).length > 0) {
-            return yarn.links.map((link) => <StoreLink key={link.id} link={link} />);
+            return yarn.links.map((link) => (
+                <StoreLink
+                    key={link.id}
+                    link={link}
+                    updateLink={updateLink}
+                    deleteLink={deleteLink}
+                />
+            ));
         }
     };
 
@@ -35,14 +61,18 @@ const StoreLinksWrapper = ({ yarn, setYarn }) => {
     };
 
     const getStoreName = (url) => {
-        switch (url.match(/www\.*\.com/)) {
-            case "www.michaels.com":
-                return "Michael's";
-            case "www.joann.com":
-                return "Joann";
-            default:
-                return "error";
+        const match = url.match(/www\.\w*\.com/);
+        if (match) {
+            switch (match[0]) {
+                case "www.michaels.com":
+                    return "Michaels";
+                case "www.joann.com":
+                    return "Joann";
+                default:
+                    return "error";
+            }
         }
+        return "error";
     };
 
     const handleKeyUp = (event) => {
@@ -56,7 +86,7 @@ const StoreLinksWrapper = ({ yarn, setYarn }) => {
     const postLink = () => {
         const store = getStoreName(linkInput);
         axios
-            .post(`${process.env.REACT_APP_DOMAIN}/yarn/link`, {
+            .post(`${process.env.REACT_APP_DOMAIN}/link/`, {
                 yarn_id: yarn.id,
                 url: linkInput,
                 store: store,

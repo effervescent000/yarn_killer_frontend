@@ -28,7 +28,7 @@ describe("Store links tests", () => {
     });
     describe("Tests with link input", () => {
         let linkInput;
-        const url = "www.michaels.com";
+        const url = "https://www.michaels.com/red-heart-super-saver-yarn-solid/M10172089.html";
         beforeEach(() => {
             userEvent.click(screen.getByRole("button", { name: /add link/i }));
             linkInput = screen.getByRole("textbox");
@@ -48,7 +48,7 @@ describe("Store links tests", () => {
                     yarn_id: 1,
                     current_price: null,
                     price_updated: null,
-                    store: "Michael's",
+                    store: "Michaels",
                 },
             });
             userEvent.type(linkInput, "{enter}");
@@ -65,7 +65,7 @@ describe("Store links tests", () => {
                     yarn_id: 1,
                     current_price: null,
                     price_updated: null,
-                    store: "Michael's",
+                    store: "Michaels",
                 },
             });
             userEvent.click(screen.getByRole("button", { name: /save/i }));

@@ -17,14 +17,18 @@ const YarnDetailPage = (props) => {
 
     useEffect(() => {
         if (Object.keys(yarn).length === 0) {
-            axios
-                .get(`${process.env.REACT_APP_DOMAIN}/yarn/${permalink}`)
-                .then((response) => {
-                    setYarn(response.data);
-                })
-                .catch((error) => console.log(error.response));
+            getYarn();
         }
     });
+
+    const getYarn = () => {
+        axios
+            .get(`${process.env.REACT_APP_DOMAIN}/yarn/${permalink}`)
+            .then((response) => {
+                setYarn(response.data);
+            })
+            .catch((error) => console.log(error.response));
+    };
 
     const handleClick = (event) => {
         if (event.target.name === "delete-link") {
@@ -40,7 +44,7 @@ const YarnDetailPage = (props) => {
     return (
         <div id="yarn-detail-page-wrapper">
             <div id="admin-wrapper">
-                {user.role == "admin" ? (
+                {user.role === "admin" ? (
                     <>
                         <div className="link-wrapper">
                             <Link to={`/yarn/${yarn.id}/edit`}>Edit yarn</Link>
@@ -62,7 +66,7 @@ const YarnDetailPage = (props) => {
                 </div>
                 <div id="right-side-grid">
                     {/* stash stuff here maybe if I do that */}
-                    <StoreLinksWrapper yarn={yarn} setYarn={setYarn} />
+                    <StoreLinksWrapper yarn={yarn} setYarn={setYarn} getYarn={getYarn} />
                 </div>
             </div>
             <div />
