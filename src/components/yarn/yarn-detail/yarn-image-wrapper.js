@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { UncontrolledCarousel } from "reactstrap";
 import { Spinner } from "reactstrap";
 
+import { UserContext } from "../../../user-context";
+
 const YarnImageWrapper = ({ yarn, setYarn }) => {
     const [addImageIsOpen, setAddImageIsOpen] = useState(false);
     const [imageUrlInput, setImageUrlInput] = useState("");
+    const { loggedIn, user } = useContext(UserContext);
 
     const handleChange = (event) => {
         if (event.target.name === "img-url-input") {
@@ -49,12 +52,14 @@ const YarnImageWrapper = ({ yarn, setYarn }) => {
         <div className="image-wrapper">
             <div className="carousel-wrapper">
                 {yarn.images.length > 0 ? <UncontrolledCarousel items={constructItems()} /> : null}
-                <button
-                    className="add-image-btn"
-                    onClick={() => setAddImageIsOpen(!addImageIsOpen)}
-                >
-                    Add an image
-                </button>
+                {loggedIn && user.role === "admin" ? (
+                    <button
+                        className="add-image-btn"
+                        onClick={() => setAddImageIsOpen(!addImageIsOpen)}
+                    >
+                        Add an image
+                    </button>
+                ) : null}
             </div>
 
             {addImageIsOpen ? (

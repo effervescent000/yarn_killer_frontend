@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { Table } from "reactstrap";
 
 import StoreLink from "./store-link";
+import { UserContext } from "../../../../user-context";
 
 const StoreLinksWrapper = ({ yarn, setYarn, getYarn }) => {
     const [showInput, setShowInput] = useState(false);
     const [linkInput, setLinkInput] = useState("");
+    const { loggedIn, user } = useContext(UserContext);
 
     const renderHeader = () => {
         if (yarn.links && yarn.links.length > 0) {
@@ -110,37 +112,39 @@ const StoreLinksWrapper = ({ yarn, setYarn, getYarn }) => {
                 {renderHeader()}
                 {populateLinks()}
             </Table>
-            <div className="input-wrapper">
-                <button
-                    name="add-link-btn"
-                    onClick={() => {
-                        setShowInput(!showInput);
-                    }}
-                    id="add-link-btn"
-                >
-                    {showInput ? <>Hide input form</> : <>Add link</>}
-                </button>
+            {loggedIn && user.role === "admin" ? (
+                <div className="input-wrapper">
+                    <button
+                        name="add-link-btn"
+                        onClick={() => {
+                            setShowInput(!showInput);
+                        }}
+                        id="add-link-btn"
+                    >
+                        {showInput ? <>Hide input form</> : <>Add link</>}
+                    </button>
 
-                {showInput ? (
-                    <form>
-                        <input
-                            type="text"
-                            name="link-input"
-                            value={linkInput}
-                            onChange={handleChange}
-                            onKeyUp={handleKeyUp}
-                        />
-                        <button
-                            id="save-link-btn"
-                            type="button"
-                            name="save-link-btn"
-                            onClick={handleClick}
-                        >
-                            Save
-                        </button>
-                    </form>
-                ) : null}
-            </div>
+                    {showInput ? (
+                        <form>
+                            <input
+                                type="text"
+                                name="link-input"
+                                value={linkInput}
+                                onChange={handleChange}
+                                onKeyUp={handleKeyUp}
+                            />
+                            <button
+                                id="save-link-btn"
+                                type="button"
+                                name="save-link-btn"
+                                onClick={handleClick}
+                            >
+                                Save
+                            </button>
+                        </form>
+                    ) : null}
+                </div>
+            ) : null}
         </div>
     );
 };

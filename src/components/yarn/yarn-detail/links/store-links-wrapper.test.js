@@ -3,17 +3,23 @@ import userEvent from "@testing-library/user-event";
 import axios from "axios";
 import renderer from "react-test-renderer";
 
-import { yarnArray } from "../../../../testutils";
+import { yarnArray, wrapWithUserContext } from "../../../../testutils";
 import StoreLinksWrapper from "./store-links-wrapper";
 
 jest.mock("axios");
 
-describe("Store links tests", () => {
+describe("Admin tests", () => {
     let setYarn;
     beforeEach(() => {
         setYarn = jest.fn();
-        render(<StoreLinksWrapper yarn={yarnArray[0]} setYarn={setYarn} />);
+        render(
+            wrapWithUserContext(<StoreLinksWrapper yarn={yarnArray[0]} setYarn={setYarn} />, {
+                user: { id: 1, username: "Admin", role: "admin" },
+                loggedIn: true,
+            })
+        );
     });
+
     test("Starts closed", () => {
         expect(screen.getByRole("button", { name: /add link/i })).toBeInTheDocument();
         expect(screen.queryByRole("button", { name: /save/i })).toBeNull();
@@ -26,6 +32,7 @@ describe("Store links tests", () => {
         userEvent.click(openLinkInputButton);
         expect(screen.queryByRole("button", { name: /save/i })).toBeNull();
     });
+
     describe("Tests with link input", () => {
         let linkInput;
         const url = "https://www.michaels.com/red-heart-super-saver-yarn-solid/M10172089.html";
@@ -72,5 +79,22 @@ describe("Store links tests", () => {
             expect(axios.post).toHaveBeenCalled();
             await waitFor(() => expect(linkInput).toHaveDisplayValue(""));
         });
+    });
+});
+
+describe("regular user tests", () => {
+    let setYarn;
+    beforeEach(() => {
+        setYarn = jest.fn();
+        render(
+            wrapWithUserContext(<StoreLinksWrapper yarn={yarnArray[0]} setYarn={setYarn} />, {
+                user: { id: 1, username: "testUser", role: "" },
+                loggedIn: true,
+            })
+        );
+    });
+    test("admin-only buttons are absent", () => {
+        expect(screen.queryByRole("button", { name: /add link/i })).toBeNull();
+        expect(screen.queryByRole("button", { name: /delete/i })).toBeNull();
     });
 });
