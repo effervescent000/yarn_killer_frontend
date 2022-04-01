@@ -13,7 +13,7 @@ const YarnDetailPage = (props) => {
     const [yarn, setYarn] = useState({});
     const { permalink } = useParams();
     const history = useHistory();
-    const { user } = useContext(UserContext);
+    const { user, loggedIn } = useContext(UserContext);
 
     useEffect(() => {
         if (Object.keys(yarn).length === 0) {
@@ -44,7 +44,7 @@ const YarnDetailPage = (props) => {
     return (
         <div id="yarn-detail-page-wrapper">
             <div id="admin-wrapper">
-                {user.role === "admin" ? (
+                {loggedIn && user.role === "admin" ? (
                     <>
                         <div className="link-wrapper">
                             <Link to={`/yarn/${yarn.id}/edit`}>Edit yarn</Link>
