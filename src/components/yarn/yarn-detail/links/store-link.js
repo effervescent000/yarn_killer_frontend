@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import { UserContext } from "../../../../user-context";
 
 const StoreLink = ({ link, updateLink, deleteLink }) => {
+    const { loggedIn, user } = useContext(UserContext);
     return (
         <tbody>
             <tr>
@@ -12,11 +15,13 @@ const StoreLink = ({ link, updateLink, deleteLink }) => {
                         Update
                     </button>
                 </td>
-                <td>
-                    <button name="delete-btn" onClick={() => deleteLink(link)}>
-                        Delete
-                    </button>
-                </td>
+                {loggedIn && user.role === "admin" ? (
+                    <td>
+                        <button name="delete-btn" onClick={() => deleteLink(link)}>
+                            Delete
+                        </button>
+                    </td>
+                ) : null}
             </tr>
         </tbody>
     );
