@@ -44,7 +44,7 @@ const YarnDetailPage = (props) => {
     return (
         <div id="yarn-detail-page-wrapper">
             <div id="admin-wrapper">
-                {user.role == "admin" ? (
+                {user.role === "admin" ? (
                     <>
                         <div className="link-wrapper">
                             <Link to={`/yarn/${yarn.id}/edit`}>Edit yarn</Link>

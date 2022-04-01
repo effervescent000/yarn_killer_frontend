@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Table } from "reactstrap";
-import * as cheerio from "cheerio";
 
 import StoreLink from "./store-link";
 
@@ -33,18 +32,13 @@ const StoreLinksWrapper = ({ yarn, setYarn, getYarn }) => {
             .catch((error) => console.log(error.response));
     };
 
-    const updateLink = async (link) => {
-        if (link.store.name === "Michaels") {
-            try {
-                const response = await axios.get(`${link.url}`);
-                const data = response.data;
-                const $ = cheerio.load(data);
-                const pricing = $(".product-pricing");
-                console.log(pricing);
-            } catch (error) {
-                console.log(error);
-            }
-        }
+    const updateLink = (link) => {
+        axios
+            .put(`${process.env.REACT_APP_DOMAIN}/link/${link.id}`)
+            .then((response) => {
+                getYarn();
+            })
+            .catch((error) => console.log(error.response));
     };
 
     const populateLinks = () => {
